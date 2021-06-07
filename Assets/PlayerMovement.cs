@@ -18,6 +18,7 @@ public class PlayerMovement : MonoBehaviour {
     private int availableJumps;
     private float movementX;
     private float groundCheckRadius;
+    private bool isGrounded;
 
     void Start() {
         rb = GetComponent<Rigidbody2D>();
@@ -29,19 +30,20 @@ public class PlayerMovement : MonoBehaviour {
 
         movementX = Input.GetAxisRaw("Horizontal");
 
-        if (Input.GetButtonDown("Jump") && (IsGrounded() || CanDoubleJump())) {
+        if (Input.GetButtonDown("Jump") && (isGrounded || CanDoubleJump())) {
             Jump();
         }
         if (Input.GetButtonUp("Jump") && rb.velocity.y > 0) {
             AdjustJump();
         }
 
-        if (IsGrounded()) {
+        if (isGrounded) {
             availableJumps = extraJumps;
         }
     }
 
     void FixedUpdate() {
+        isGrounded = IsGrounded();
         MoveCharacter();
     }
 
@@ -70,7 +72,7 @@ public class PlayerMovement : MonoBehaviour {
 
     // ----- G R O U N D   C H E C K   D E B U G -----
     /*private void OnDrawGizmos() {
-        if (!IsGrounded()) {
+        if (!isGrounded) {
             Gizmos.color = Color.red;
         } else {
             Gizmos.color = Color.green;

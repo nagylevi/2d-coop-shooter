@@ -1,9 +1,10 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class PlayerController : MonoBehaviour {
 
-    //public List<Behaviour> componentsToDisable;
+    public List<Behaviour> componentsToDisable;
 
     [Header("Player Settings")]
     public GameObject playerGFX;
@@ -11,7 +12,19 @@ public class PlayerController : MonoBehaviour {
     private bool isFacingRight = true;
     private Vector3 mousePosition;
 
+    private PhotonView view;
+
+    void Start() {
+        view = GetComponent<PhotonView>();
+        if (!view.IsMine) {
+            DisableComponents();
+        }
+    }
+
     void Update() {
+        if (!view.IsMine)
+            return;
+
         CheckPlayerPositionToMousePosition();
     }
 
@@ -28,4 +41,11 @@ public class PlayerController : MonoBehaviour {
         isFacingRight = !isFacingRight;
         playerGFX.transform.Rotate(0f, 180f, 0f);
     }
+
+    void DisableComponents() {
+        foreach(Behaviour component in componentsToDisable) {
+            component.enabled = false;
+        }
+    }
+
 }

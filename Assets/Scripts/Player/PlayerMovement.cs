@@ -13,6 +13,9 @@ public class PlayerMovement : MonoBehaviour {
     public float groundCheckOffsetY = 0.1f;
     public LayerMask platformLayerMask;
 
+    [Header("Animation Settings")]
+    public Animator animator;
+
     private Rigidbody2D rb;
     private CapsuleCollider2D capsuleCollider2D;
 
@@ -37,6 +40,11 @@ public class PlayerMovement : MonoBehaviour {
 
         movementX = Input.GetAxisRaw("Horizontal");
 
+        isGrounded = IsGrounded();
+
+        animator.SetFloat("Speed", Mathf.Abs(movementX));
+        animator.SetBool("IsJumping", !isGrounded);
+
         if (Input.GetButtonDown("Jump") && (isGrounded || CanDoubleJump())) {
             Jump();
         }
@@ -50,7 +58,6 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     void FixedUpdate() {
-        isGrounded = IsGrounded();
         MoveCharacter();
     }
 

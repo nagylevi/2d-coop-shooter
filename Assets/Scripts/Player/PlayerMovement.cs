@@ -16,6 +16,9 @@ public class PlayerMovement : MonoBehaviour {
     [Header("Animation Settings")]
     public Animator animator;
 
+    [Header("Player Controller")]
+    public PlayerController controller;
+
     private Rigidbody2D rb;
     private CapsuleCollider2D capsuleCollider2D;
 
@@ -23,6 +26,7 @@ public class PlayerMovement : MonoBehaviour {
     private float movementX;
     private float groundCheckRadius;
     private bool isGrounded;
+    private bool isGoingBackwards;
 
     private PhotonView view;
 
@@ -42,8 +46,12 @@ public class PlayerMovement : MonoBehaviour {
 
         isGrounded = IsGrounded();
 
+        SetIsGoingBackwards();
+
+        // Animations
         animator.SetFloat("Speed", Mathf.Abs(movementX));
         animator.SetBool("IsJumping", !isGrounded);
+        animator.SetBool("IsGoingBackwards", isGoingBackwards);
 
         if (Input.GetButtonDown("Jump") && (isGrounded || CanDoubleJump())) {
             Jump();
@@ -82,6 +90,14 @@ public class PlayerMovement : MonoBehaviour {
 
     bool CanDoubleJump() {
         return availableJumps > 0;
+    }
+
+    void SetIsGoingBackwards() {
+        if ((controller.isFacingRight && movementX < 0) || (!controller.isFacingRight && movementX > 0)) {
+            isGoingBackwards = true;
+        } else {
+            isGoingBackwards = false;
+        }
     }
 
     // ----- G R O U N D   C H E C K   D E B U G -----

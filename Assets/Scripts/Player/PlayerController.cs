@@ -1,15 +1,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using UnityEngine.Animations.Rigging;
 
 public class PlayerController : MonoBehaviour {
 
     public List<Behaviour> componentsToDisable;
 
+    public PlayerMovement playerMovement;
+
     [Header("Player Settings")]
     public GameObject playerGFX;
+    public GameObject headAimTarget;
 
-    private bool isFacingRight = true;
+    [HideInInspector]
+    public bool isFacingRight = true;
     private Vector3 mousePosition;
 
     private PhotonView view;
@@ -26,6 +31,8 @@ public class PlayerController : MonoBehaviour {
             return;
 
         CheckPlayerPositionToMousePosition();
+
+        headAimTarget.transform.position = new Vector2(mousePosition.x, mousePosition.y);
     }
 
     void CheckPlayerPositionToMousePosition() {

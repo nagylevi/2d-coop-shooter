@@ -12,6 +12,14 @@ public class PlayerController : MonoBehaviour {
     [Header("Player Settings")]
     public GameObject playerGFX;
     public GameObject headAimTarget;
+    public Transform weaponHolder;
+    public Transform weaponOffset;
+
+    [Header("Animation IK References")]
+    public Transform leftArmSolverTarget;
+    public Transform rightArmSolverTarget;
+    public Transform leftArmGunPos;
+    public Transform rightArmGunPos;
 
     [HideInInspector]
     public bool isFacingRight = true;
@@ -30,13 +38,24 @@ public class PlayerController : MonoBehaviour {
         if (!view.IsMine)
             return;
 
+        // Get mouse position
+        mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+        // Handles the weapon rotation
+        RotateGunTowardsMouse();
+
+        // Hande Player rotation based on mouse positin
         CheckPlayerPositionToMousePosition();
 
+        // Set the headAimTarget position based on mousePosition
         headAimTarget.transform.position = new Vector2(mousePosition.x, mousePosition.y);
+
+        // Handle IK hand animation
+        leftArmSolverTarget.position = leftArmGunPos.position;
+        rightArmSolverTarget.position = rightArmGunPos.position;
     }
 
     void CheckPlayerPositionToMousePosition() {
-        mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         if (isFacingRight && mousePosition.x < transform.position.x) {
             FlipPlayerGFX();
         } else if (!isFacingRight && mousePosition.x > transform.position.x) {
@@ -47,12 +66,19 @@ public class PlayerController : MonoBehaviour {
     void FlipPlayerGFX() {
         isFacingRight = !isFacingRight;
         playerGFX.transform.Rotate(0f, 180f, 0f);
+        weaponOffset.Rotate(180f, 0f, 0f);
     }
 
     void DisableComponents() {
         foreach(Behaviour component in componentsToDisable) {
             component.enabled = false;
         }
+    }
+
+    void RotateGunTowardsMouse() {
+        Vector3 difference = mousePosition - weaponHolder.position;
+        float rotZ = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
+        weaponHolder.rotation = Quaternion.Euler(0f, 0f, rotZ);
     }
 
 }

@@ -1,37 +1,34 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
-using UnityEngine.Animations.Rigging;
 
 public class PlayerController : MonoBehaviour {
 
     public List<Behaviour> componentsToDisable;
-
-    public PlayerMovement playerMovement;
 
     [Header("Player Settings")]
     public GameObject playerGFX;
     public GameObject headAimTarget;
     public Transform weaponHolder;
     public Transform weaponOffset;
+    public LayerMask targetLayerMask;
 
     [Header("Animation IK References")]
     public Transform leftArmSolverTarget;
     public Transform rightArmSolverTarget;
-    public Transform leftArmGunPos;
-    public Transform rightArmGunPos;
 
     [HideInInspector]
     public bool isFacingRight = true;
-    private Vector3 mousePosition;
 
+    private Vector3 mousePosition;
     private PhotonView view;
+    private Gun gun;
+
+    private const int FIRST_GUN_INDEX = 0;
 
     void Start() {
         view = GetComponent<PhotonView>();
-        if (!view.IsMine) {
-            DisableComponents();
-        }
+        SetupPlayer();
     }
 
     void Update() {
@@ -51,27 +48,40 @@ public class PlayerController : MonoBehaviour {
         headAimTarget.transform.position = new Vector2(mousePosition.x, mousePosition.y);
 
         // Handle IK hand animation
-        leftArmSolverTarget.position = leftArmGunPos.position;
-        rightArmSolverTarget.position = rightArmGunPos.position;
+        if (gun != null) {
+            leftArmSolverTarget.position = gun.leftHandGrip.position;
+            rightArmSolverTarget.position = gun.rightHandGrip.position;
+        }
+
+        // Handle Player Shooting
+        if (Input.GetMouseButton(0)) {
+            Shoot();
+        }
     }
 
     void CheckPlayerPositionToMousePosition() {
         if (isFacingRight && mousePosition.x < transform.position.x) {
-            FlipPlayerGFX();
+            FlipPlayerAndGunGFX();
         } else if (!isFacingRight && mousePosition.x > transform.position.x) {
-            FlipPlayerGFX();
+            FlipPlayerAndGunGFX();
         }
     }
 
-    void FlipPlayerGFX() {
+    void FlipPlayerAndGunGFX() {
         isFacingRight = !isFacingRight;
         playerGFX.transform.Rotate(0f, 180f, 0f);
         weaponOffset.Rotate(180f, 0f, 0f);
     }
 
-    void DisableComponents() {
-        foreach(Behaviour component in componentsToDisable) {
-            component.enabled = false;
+    void SetupPlayer() {
+        if (!view.IsMine) {
+            gameObject.layer = LayerMask.NameToLayer("RemotePlayer");
+            foreach (Behaviour component in componentsToDisable) {
+                component.enabled = false;
+            }
+        } else if (view.IsMine) {
+            gameObject.layer = LayerMask.NameToLayer("LocalPlayer");
+            gun = weaponOffset.GetChild(FIRST_GUN_INDEX).GetComponent<Gun>();
         }
     }
 
@@ -79,6 +89,15 @@ public class PlayerController : MonoBehaviour {
         Vector3 difference = mousePosition - weaponHolder.position;
         float rotZ = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
         weaponHolder.rotation = Quaternion.Euler(0f, 0f, rotZ);
+    }
+
+    void Shoot() {
+        Vector2 shootDir = (mousePosition - gun.firePoint.position).normalized;
+        RaycastHit2D raycastHit2D = Physics2D.Raycast(gun.firePoint.position, shootDir, 100f, targetLayerMask);
+        if (raycastHit2D.collider != null) {
+            // Hit
+            Debug.Log("We hit something");
+        }
     }
 
 }

@@ -134,6 +134,7 @@ MonoBehaviour:
   firePoint: {fileID: 7259915592492569816}
   leftHandGrip: {fileID: 9139737949995792553}
   rightHandGrip: {fileID: 6461222787123861793}
+  bullet: {fileID: 1503157732641308652, guid: 99cd45299b1ee4949b2755bb7a535030, type: 3}
 --- !u!1 &5213878232172761905
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,5 +7,6 @@ public class Gun : MonoBehaviour {
     public Transform firePoint;
     public Transform leftHandGrip;
     public Transform rightHandGrip;
+    public GameObject bullet;
 
 }

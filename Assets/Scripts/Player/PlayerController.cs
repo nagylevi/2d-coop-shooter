@@ -54,8 +54,8 @@ public class PlayerController : MonoBehaviour {
         }
 
         // Handle Player Shooting
-        if (Input.GetMouseButton(0)) {
-            Shoot();
+        if (Input.GetMouseButtonDown(0)) {
+            view.RPC("RPC_Shoot", RpcTarget.All);
         }
     }
 
@@ -91,13 +91,18 @@ public class PlayerController : MonoBehaviour {
         weaponHolder.rotation = Quaternion.Euler(0f, 0f, rotZ);
     }
 
-    void Shoot() {
+    [PunRPC]
+    void RPC_Shoot() {
+        // ----- Raycast shoot -----
         Vector2 shootDir = (mousePosition - gun.firePoint.position).normalized;
-        RaycastHit2D raycastHit2D = Physics2D.Raycast(gun.firePoint.position, shootDir, 100f, targetLayerMask);
+        /*RaycastHit2D raycastHit2D = Physics2D.Raycast(gun.firePoint.position, shootDir, 100f, targetLayerMask);
         if (raycastHit2D.collider != null) {
             // Hit
             Debug.Log("We hit something");
-        }
-    }
+        }*/
 
+        // ----- Projectile shoot -----
+        GameObject pf_Bullet = Instantiate(gun.bullet, gun.firePoint.position, Quaternion.identity);
+        pf_Bullet.GetComponent<Bullet>().Setup(shootDir);
+    }
 }

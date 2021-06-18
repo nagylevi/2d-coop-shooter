@@ -95,11 +95,11 @@ public class PlayerController : MonoBehaviour {
     void RPC_Shoot() {
         // ----- Raycast shoot -----
         Vector2 shootDir = (mousePosition - gun.firePoint.position).normalized;
-        /*RaycastHit2D raycastHit2D = Physics2D.Raycast(gun.firePoint.position, shootDir, 100f, targetLayerMask);
+        RaycastHit2D raycastHit2D = Physics2D.Raycast(gun.firePoint.position, shootDir, 100f, targetLayerMask);
         if (raycastHit2D.collider != null) {
             // Hit
             Debug.Log("We hit something");
-        }*/
+        }
 
         // ----- Projectile shoot -----
         GameObject pf_Bullet = Instantiate(gun.bullet, gun.firePoint.position, Quaternion.identity);

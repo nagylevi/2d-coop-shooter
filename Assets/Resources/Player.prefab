@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5629985180377372277}
-  - component: {fileID: 7002256495283250441}
   - component: {fileID: 5362988252504464963}
+  - component: {fileID: 635676092433009240}
   m_Layer: 0
   m_Name: WeaponOffset
   m_TagString: Untagged
@@ -33,29 +33,6 @@ Transform:
   m_Father: {fileID: 7497762221431392032}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7002256495283250441
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 69031526247413476}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ObservedComponentsFoldoutOpen: 1
-  Group: 0
-  prefixField: -1
-  Synchronization: 3
-  OwnershipTransfer: 0
-  observableSearch: 2
-  ObservedComponents:
-  - {fileID: 5362988252504464963}
-  sceneViewId: 0
-  InstantiationId: 0
-  isRuntimeInstantiated: 0
 --- !u!114 &5362988252504464963
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -89,6 +66,29 @@ MonoBehaviour:
     InterpolateOption: 0
     InterpolateMoveTowardsSpeed: 1
     InterpolateLerpSpeed: 0
+--- !u!114 &635676092433009240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 69031526247413476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents:
+  - {fileID: 5362988252504464963}
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &210232209067093475
 GameObject:
   m_ObjectHideFlags: 0
@@ -318,7 +318,7 @@ GameObject:
   - component: {fileID: 210232210366750141}
   - component: {fileID: 210232210366750140}
   - component: {fileID: 6205408805685134730}
-  - component: {fileID: 5697484760263069365}
+  - component: {fileID: 2653655517834713206}
   - component: {fileID: 7650225541375812546}
   - component: {fileID: 5123072241544510085}
   - component: {fileID: 191531856501343553}
@@ -461,7 +461,7 @@ MonoBehaviour:
     showGizmo: 1
   - color: {r: 0, g: 1, b: 0, a: 1}
     showGizmo: 1
---- !u!114 &5697484760263069365
+--- !u!114 &2653655517834713206
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -865,7 +865,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6178159058533967614}
-  - component: {fileID: 4982429913708043808}
+  - component: {fileID: 8127679933139840278}
   - component: {fileID: 4510931918310979049}
   m_Layer: 0
   m_Name: HeadAimTarget
@@ -888,7 +888,7 @@ Transform:
   m_Father: {fileID: 6226720842052442483}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4982429913708043808
+--- !u!114 &8127679933139840278
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -953,7 +953,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7497762221431392032}
-  - component: {fileID: 1206942995443163680}
+  - component: {fileID: 6537929265868816489}
   - component: {fileID: 4477710616024252606}
   m_Layer: 0
   m_Name: WeaponHolder
@@ -977,7 +977,7 @@ Transform:
   m_Father: {fileID: 210232210366750138}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
---- !u!114 &1206942995443163680
+--- !u!114 &6537929265868816489
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1089,7 +1089,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6205408804484854887}
-  - component: {fileID: 416469753559254641}
+  - component: {fileID: 5167986953866602800}
   - component: {fileID: 8434380044868192269}
   m_Layer: 0
   m_Name: LeftArmSolver_Target
@@ -1112,7 +1112,7 @@ Transform:
   m_Father: {fileID: 6205408805496883851}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &416469753559254641
+--- !u!114 &5167986953866602800
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1237,7 +1237,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6205408805050930884}
-  - component: {fileID: 1348207672219331605}
+  - component: {fileID: 4124073802691875304}
   - component: {fileID: 610171773367345565}
   m_Layer: 0
   m_Name: RightArmSolver_Target
@@ -1260,7 +1260,7 @@ Transform:
   m_Father: {fileID: 6205408806124234563}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1348207672219331605
+--- !u!114 &4124073802691875304
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1681,7 +1681,7 @@ MonoBehaviour:
   weaponOffset: {fileID: 5629985180377372277}
   targetLayerMask:
     serializedVersion: 2
-    m_Bits: 375
+    m_Bits: 64
   leftArmSolverTarget: {fileID: 6205408804484854887}
   rightArmSolverTarget: {fileID: 6205408805050930884}
   isFacingRight: 1
@@ -2012,6 +2012,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5629985180377372277}
     m_Modifications:
+    - target: {fileID: 543899586738141351, guid: 7067c015b71dd9044ad335d0befc74d8, type: 3}
+      propertyPath: sceneViewId
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 747170907884003327, guid: 7067c015b71dd9044ad335d0befc74d8, type: 3}
+      propertyPath: sceneViewId
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 998863923239391905, guid: 7067c015b71dd9044ad335d0befc74d8, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -2059,6 +2067,10 @@ PrefabInstance:
     - target: {fileID: 1318134218875598624, guid: 7067c015b71dd9044ad335d0befc74d8, type: 3}
       propertyPath: m_Name
       value: Gun
+      objectReference: {fileID: 0}
+    - target: {fileID: 1760360702466653197, guid: 7067c015b71dd9044ad335d0befc74d8, type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].value
+      value: 0.17020959
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7067c015b71dd9044ad335d0befc74d8, type: 3}

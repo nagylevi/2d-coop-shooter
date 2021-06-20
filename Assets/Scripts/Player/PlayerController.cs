@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using System.Collections;
 
 public class PlayerController : MonoBehaviour {
 
@@ -55,7 +56,8 @@ public class PlayerController : MonoBehaviour {
 
         // Handle Player Shooting
         if (Input.GetMouseButtonDown(0)) {
-            view.RPC("RPC_Shoot", RpcTarget.All);
+            view.RPC("RPC_Shoot", RpcTarget.All, gun.firePoint.position, gun.firePoint.right, gun.impactParticle.name, gun.GetComponent<PhotonView>().ViewID);
+            Local_Shoot();
         }
     }
 
@@ -92,17 +94,32 @@ public class PlayerController : MonoBehaviour {
     }
 
     [PunRPC]
-    void RPC_Shoot() {
-        // ----- Raycast shoot -----
-        Vector2 shootDir = (mousePosition - gun.firePoint.position).normalized;
-        RaycastHit2D raycastHit2D = Physics2D.Raycast(gun.firePoint.position, shootDir, 100f, targetLayerMask);
+    void RPC_Shoot(Vector3 firerPoint, Vector3 shootDir, string impactParticle, int photonViewID) {
+        float range = 100f;
+        LineRenderer lineRenderer = PhotonNetwork.GetPhotonView(photonViewID).gameObject.GetComponent<Gun>().lineRenderer;
+        RaycastHit2D raycastHit2D = Physics2D.Raycast(firerPoint, shootDir, range, targetLayerMask);
         if (raycastHit2D.collider != null) {
-            // Hit
-            Debug.Log("We hit something");
+            // Instantiate impactParticle
+            if (PhotonNetwork.IsMasterClient) {
+                PhotonNetwork.Instantiate(impactParticle, raycastHit2D.point, Quaternion.identity);
+            }
+            // Draw Line
+            StartCoroutine(DrawGunLine(lineRenderer, firerPoint, raycastHit2D.point));
+        } else {
+            StartCoroutine(DrawGunLine(lineRenderer, firerPoint, shootDir * range));
         }
+    }
 
-        // ----- Projectile shoot -----
-        GameObject pf_Bullet = Instantiate(gun.bullet, gun.firePoint.position, Quaternion.identity);
-        pf_Bullet.GetComponent<Bullet>().Setup(shootDir);
+    IEnumerator DrawGunLine(LineRenderer renderer, Vector3 startPoint, Vector2 endPoint) {
+        renderer.enabled = true;
+        renderer.SetPosition(0, startPoint);
+        renderer.SetPosition(1, endPoint);
+        yield return new WaitForSeconds(0.02f);
+        renderer.enabled = false;
+    }
+
+    void Local_Shoot() {
+        gun.animator.ResetTrigger("FireTrigger");
+        gun.animator.SetTrigger("FireTrigger");
     }
 }

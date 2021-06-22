@@ -19,12 +19,17 @@ public class Gun : MonoBehaviour {
 
     private bool readyToShoot = true;
 
-    public bool CanShoot() {
-        return readyToShoot;
+    public void Shoot() {
+        readyToShoot = false;
+        Invoke(nameof(ResetShoot), fireRate);
     }
 
-    public void SetReadyToShoot(bool state) {
-        readyToShoot = state;
+    void ResetShoot() {
+        readyToShoot = true;
+    }
+
+    public bool IsReadyToShoot() {
+        return readyToShoot;
     }
 }
 

@@ -293,7 +293,7 @@ GameObject:
   - component: {fileID: 7995256090450882093}
   - component: {fileID: 202512700395397921}
   m_Layer: 0
-  m_Name: Gun
+  m_Name: AUG_A3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -327,7 +327,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 15
-  fireRate: 5
+  fireRate: 0.2
   fireMode: 0
   leftHandGrip: {fileID: 9139737949995792553}
   rightHandGrip: {fileID: 6461222787123861793}

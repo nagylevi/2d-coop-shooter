@@ -59,10 +59,10 @@ public class PlayerController : MonoBehaviour {
         CheckPlayerInput();
 
         // Handle Player Shooting
-        // TODO: Fix Player Shooting (fireRate) allow button hold etc...
-        if (shootingInput) {
+        if (shootingInput && currentGun.IsReadyToShoot()) {
+            currentGun.Shoot();
             view.RPC("RPC_Shoot", RpcTarget.All, currentGun.firePoint.position, currentGun.firePoint.right, currentGun.GetComponent<PhotonView>().ViewID);
-            Local_Shoot();
+            Local_Shoot(); // Maybe do this in the RPC call
         }
     }
 

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5362988252504464963}
   - component: {fileID: 635676092433009240}
   m_Layer: 0
-  m_Name: WeaponOffset
+  m_Name: GunOffset
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,7 +29,7 @@ Transform:
   m_LocalPosition: {x: 1.35, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 4273702518298213870}
+  - {fileID: 391900356424272325}
   m_Father: {fileID: 7497762221431392032}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -956,7 +956,7 @@ GameObject:
   - component: {fileID: 6537929265868816489}
   - component: {fileID: 4477710616024252606}
   m_Layer: 0
-  m_Name: WeaponHolder
+  m_Name: GunHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1677,8 +1677,8 @@ MonoBehaviour:
   - {fileID: 8037026488643000145}
   playerGFX: {fileID: 210232210366750143}
   headAimTarget: {fileID: 3847316430111877942}
-  weaponHolder: {fileID: 7497762221431392032}
-  weaponOffset: {fileID: 5629985180377372277}
+  gunHolder: {fileID: 7497762221431392032}
+  gunOffset: {fileID: 5629985180377372277}
   targetLayerMask:
     serializedVersion: 2
     m_Bits: 64
@@ -2005,14 +2005,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Weight: 1
   m_Effectors: []
---- !u!1001 &3932646046239846223
+--- !u!1001 &625123204610366308
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 5629985180377372277}
     m_Modifications:
-    - target: {fileID: 543899586738141351, guid: 7067c015b71dd9044ad335d0befc74d8, type: 3}
+    - target: {fileID: 202512700395397921, guid: 7067c015b71dd9044ad335d0befc74d8, type: 3}
       propertyPath: sceneViewId
       value: 0
       objectReference: {fileID: 0}
@@ -2066,16 +2066,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1318134218875598624, guid: 7067c015b71dd9044ad335d0befc74d8, type: 3}
       propertyPath: m_Name
-      value: Gun
-      objectReference: {fileID: 0}
-    - target: {fileID: 1760360702466653197, guid: 7067c015b71dd9044ad335d0befc74d8, type: 3}
-      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].value
-      value: 0.17020959
+      value: AUG_A3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7067c015b71dd9044ad335d0befc74d8, type: 3}
---- !u!4 &4273702518298213870 stripped
+--- !u!4 &391900356424272325 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 998863923239391905, guid: 7067c015b71dd9044ad335d0befc74d8, type: 3}
-  m_PrefabInstance: {fileID: 3932646046239846223}
+  m_PrefabInstance: {fileID: 625123204610366308}
   m_PrefabAsset: {fileID: 0}

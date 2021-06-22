@@ -28,7 +28,7 @@ public class DestroWithTime : MonoBehaviour {
                     PhotonNetwork.Destroy(view);
                 }
             } else {
-                Destroy(this);
+                Destroy(gameObject);
             }
         } else {
             timer -= Time.deltaTime;

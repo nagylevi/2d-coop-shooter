@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour {
     public Transform gunHolder;
     public Transform gunOffset;
     public LayerMask targetLayerMask;
+    public CinemachineShake cinemachineShake;
 
     [Header("Animation IK References")]
     public Transform leftArmSolverTarget;
@@ -60,9 +61,12 @@ public class PlayerController : MonoBehaviour {
 
         // Handle Player Shooting
         if (shootingInput && currentGun.IsReadyToShoot()) {
+            // This method handles the fireRate locally
             currentGun.Shoot();
+            // Camera Shake
+            cinemachineShake.ShakeCamera(currentGun.cameraShakeIntensity, currentGun.cameraShakeTime);
+            // RPC call
             view.RPC("RPC_Shoot", RpcTarget.All, currentGun.firePoint.position, currentGun.firePoint.right, currentGun.GetComponent<PhotonView>().ViewID);
-            Local_Shoot(); // Maybe do this in the RPC call
         }
     }
 
@@ -106,6 +110,7 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
+    // This RPC call happens on every client when a player shoot
     [PunRPC]
     void RPC_Shoot(Vector3 firerPoint, Vector3 shootDir, int photonViewID) {
         float range = 50f;
@@ -114,12 +119,17 @@ public class PlayerController : MonoBehaviour {
         if (raycastHit2D.collider != null) {
             // Instantiate impactParticle
             Instantiate(gunRef.impactParticle, raycastHit2D.point, Quaternion.identity);
-            // Draw Line
+            // Draw Line on hit
             StartCoroutine(DrawBulletTracingLine(gunRef.lineRenderer, firerPoint, raycastHit2D.point));
         } else {
-            // Draw Line
+            // Draw Line when no hit
             StartCoroutine(DrawBulletTracingLine(gunRef.lineRenderer, firerPoint, shootDir * range));
         }
+        // Handle Fire animation
+        gunRef.animator.ResetTrigger("FireTrigger");
+        gunRef.animator.SetTrigger("FireTrigger");
+
+        // TODO: MuzzleFlash
     }
 
     IEnumerator DrawBulletTracingLine(LineRenderer renderer, Vector3 startPoint, Vector2 endPoint) {
@@ -128,10 +138,5 @@ public class PlayerController : MonoBehaviour {
         renderer.SetPosition(1, endPoint);
         yield return new WaitForSeconds(0.02f);
         renderer.enabled = false;
-    }
-
-    void Local_Shoot() {
-        currentGun.animator.ResetTrigger("FireTrigger");
-        currentGun.animator.SetTrigger("FireTrigger");
     }
 }

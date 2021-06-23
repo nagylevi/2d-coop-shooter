@@ -11,8 +11,6 @@ GameObject:
   - component: {fileID: 2753720579699079018}
   - component: {fileID: 1048690342907723981}
   - component: {fileID: 6496897093100240995}
-  - component: {fileID: 747170907884003327}
-  - component: {fileID: 1370244052917490908}
   m_Layer: 0
   m_Name: GunGFX
   m_TagString: Untagged
@@ -108,50 +106,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &747170907884003327
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 436738662230155506}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ObservedComponentsFoldoutOpen: 1
-  Group: 0
-  prefixField: -1
-  Synchronization: 3
-  OwnershipTransfer: 0
-  observableSearch: 2
-  ObservedComponents:
-  - {fileID: 1370244052917490908}
-  sceneViewId: 0
-  InstantiationId: 0
-  isRuntimeInstantiated: 0
---- !u!114 &1370244052917490908
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 436738662230155506}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b8c4a61274f60b4ea5fb4299cfdbf14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShowLayerWeightsInspector: 1
-  ShowParameterInspector: 1
-  m_SynchronizeParameters:
-  - Type: 9
-    SynchronizeType: 1
-    Name: FireTrigger
-  m_SynchronizeLayers:
-  - SynchronizeType: 0
-    LayerIndex: 0
 --- !u!1 &1050858382330687699
 GameObject:
   m_ObjectHideFlags: 0
@@ -331,6 +285,8 @@ MonoBehaviour:
   fireMode: 0
   leftHandGrip: {fileID: 9139737949995792553}
   rightHandGrip: {fileID: 6461222787123861793}
+  cameraShakeIntensity: 0.8
+  cameraShakeTime: 0.2
   firePoint: {fileID: 7259915592492569816}
   impactParticle: {fileID: 3675956374015122888, guid: 3770e388356525447a4403e429db163a, type: 3}
   animator: {fileID: 6496897093100240995}

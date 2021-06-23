@@ -11,6 +11,10 @@ public class Gun : MonoBehaviour {
     public Transform leftHandGrip;
     public Transform rightHandGrip;
 
+    [Header("Camera Shake Settings")]
+    public float cameraShakeIntensity;
+    public float cameraShakeTime;
+
     [Header("References")]
     public Transform firePoint;
     public GameObject impactParticle;
@@ -29,7 +33,7 @@ public class Gun : MonoBehaviour {
     }
 
     public bool IsReadyToShoot() {
-        return readyToShoot;
+        return readyToShoot || fireMode == GunFireMode.Single;
     }
 }
 

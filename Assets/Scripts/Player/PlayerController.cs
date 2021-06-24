@@ -128,8 +128,8 @@ public class PlayerController : MonoBehaviour {
         // Handle Fire animation
         gunRef.animator.ResetTrigger("FireTrigger");
         gunRef.animator.SetTrigger("FireTrigger");
-
-        // TODO: MuzzleFlash
+        // Handle Muzzle Flash
+        StartCoroutine(DoMuzzleFlash(gunRef.muzzleFlash));
     }
 
     IEnumerator DrawBulletTracingLine(LineRenderer renderer, Vector3 startPoint, Vector2 endPoint) {
@@ -138,5 +138,12 @@ public class PlayerController : MonoBehaviour {
         renderer.SetPosition(1, endPoint);
         yield return new WaitForSeconds(0.02f);
         renderer.enabled = false;
+    }
+
+    IEnumerator DoMuzzleFlash(SpriteRenderer _muzzleFlash) {
+        _muzzleFlash.enabled = true;
+        yield return new WaitForSeconds(0.02f);
+        _muzzleFlash.enabled = false;
+
     }
 }

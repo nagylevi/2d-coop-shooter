@@ -20,6 +20,7 @@ public class Gun : MonoBehaviour {
     public GameObject impactParticle;
     public Animator animator;
     public LineRenderer lineRenderer;
+    public SpriteRenderer muzzleFlash;
 
     private bool readyToShoot = true;
 

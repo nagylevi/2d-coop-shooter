@@ -289,7 +289,8 @@ MonoBehaviour:
   cameraShakeIntensity: 0.8
   cameraShakeTime: 0.2
   firePoint: {fileID: 7259915592492569816}
-  impactParticle: {fileID: 3675956374015122888, guid: 3770e388356525447a4403e429db163a, type: 3}
+  impactParticle: {fileID: 3675956374015122888, guid: be31479cd6c7c7e4f8faa3d42037422d, type: 3}
+  enemyHitParticle: {fileID: 4071170463365097166, guid: 55371694211d50e419f9008a1313df83, type: 3}
   animator: {fileID: 6496897093100240995}
   lineRenderer: {fileID: 1760360702466653197}
   muzzleFlash: {fileID: 9154358785220920167}

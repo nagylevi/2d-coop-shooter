@@ -18,6 +18,7 @@ public class Gun : MonoBehaviour {
     [Header("References")]
     public Transform firePoint;
     public GameObject impactParticle;
+    public GameObject enemyHitParticle;
     public Animator animator;
     public LineRenderer lineRenderer;
     public SpriteRenderer muzzleFlash;

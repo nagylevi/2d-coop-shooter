@@ -6,11 +6,16 @@ using UnityEngine;
 public class Enemy : ScriptableObject {
 
     public string enemyName;
-
     public int health;
     public int damage;
-
     public float moveSpeed;
     public float attackSpeed;
     public float attackRange;
+    public EnemyType enemyType;
+    public Color enemyColor;
+}
+
+public enum EnemyType {
+    Ranged,
+    Melee
 }

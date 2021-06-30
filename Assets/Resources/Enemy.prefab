@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1237220054278675466}
   - component: {fileID: 1237220054278675469}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: EnemyGFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,9 +96,9 @@ GameObject:
   - component: {fileID: 1237220055099524303}
   - component: {fileID: 1237220055099524300}
   - component: {fileID: 1237220055099524301}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -112,7 +112,7 @@ Transform:
   m_GameObject: {fileID: 1237220055099524299}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 1237220054278675466}
   m_Father: {fileID: 0}
@@ -206,3 +206,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d76697fd70c6b0146948de6e184d7876, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 1237220054278675469}
+  deathEffect: {fileID: 3675956374015122888, guid: 3770e388356525447a4403e429db163a, type: 3}

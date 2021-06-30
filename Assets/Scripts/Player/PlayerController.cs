@@ -117,17 +117,22 @@ public class PlayerController : MonoBehaviour {
         Gun gunRef = PhotonNetwork.GetPhotonView(photonViewID).gameObject.GetComponent<Gun>();
         RaycastHit2D raycastHit2D = Physics2D.Raycast(firerPoint, shootDir, range, targetLayerMask);
         if (raycastHit2D.collider != null) {
-            // Instantiate impactParticle
-            Instantiate(gunRef.impactParticle, raycastHit2D.point, Quaternion.identity);
-            // Draw Line on hit
-            StartCoroutine(DrawBulletTracingLine(gunRef.lineRenderer, firerPoint, raycastHit2D.point));
+            // On Damage Enemy
+            if (raycastHit2D.collider.CompareTag("Enemy")) {
+                raycastHit2D.collider.gameObject.GetComponent<EnemyController>().TakeDamage(gunRef.damage); // Call TakeDamage functionDieRPC
+                Instantiate(gunRef.enemyHitParticle, raycastHit2D.point, Quaternion.identity); // Instantiate enemyHitParticle
+            } else {
+                Instantiate(gunRef.impactParticle, raycastHit2D.point, Quaternion.identity); // Instantiate impactParticle
+            }
+            StartCoroutine(DrawBulletTracingLine(gunRef.lineRenderer, firerPoint, raycastHit2D.point)); // Draw Line on hit
         } else {
-            // Draw Line when no hit
-            StartCoroutine(DrawBulletTracingLine(gunRef.lineRenderer, firerPoint, shootDir * range));
+            StartCoroutine(DrawBulletTracingLine(gunRef.lineRenderer, firerPoint, shootDir * range)); // Draw Line when no hit
         }
+
         // Handle Fire animation
         gunRef.animator.ResetTrigger("FireTrigger");
         gunRef.animator.SetTrigger("FireTrigger");
+
         // Handle Muzzle Flash
         StartCoroutine(DoMuzzleFlash(gunRef.muzzleFlash));
     }

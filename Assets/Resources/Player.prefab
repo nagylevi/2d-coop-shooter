@@ -1699,7 +1699,7 @@ MonoBehaviour:
   gunOffset: {fileID: 5629985180377372277}
   targetLayerMask:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 576
   cinemachineShake: {fileID: 5449394195258412168}
   leftArmSolverTarget: {fileID: 6205408804484854887}
   rightArmSolverTarget: {fileID: 6205408805050930884}

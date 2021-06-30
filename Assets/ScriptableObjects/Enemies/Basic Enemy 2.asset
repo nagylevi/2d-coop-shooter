@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d57ebcaf54c9d794fbc7c740f42ed6fc, type: 3}
-  m_Name: Basic Enemy
+  m_Name: Basic Enemy 2
   m_EditorClassIdentifier: 
-  enemyName: Basic Enemy
-  health: 100
-  damage: 8
-  moveSpeed: 10
+  enemyName: Basic Enemy 2
+  health: 120
+  damage: 7
+  moveSpeed: 8
   attackSpeed: 1.5
   attackRange: 4
-  enemyType: 0
-  enemyColor: {r: 0.6132076, g: 0.28635636, b: 0.28635636, a: 1}
+  enemyType: 1
+  enemyColor: {r: 0.26415092, g: 0.18814524, b: 0.18814524, a: 1}

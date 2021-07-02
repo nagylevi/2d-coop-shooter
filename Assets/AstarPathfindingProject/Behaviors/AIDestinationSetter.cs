@@ -33,6 +33,7 @@ namespace Pathfinding {
 
 		/// <summary>Updates the AI's destination every frame</summary>
 		void Update () {
+			target = GameObject.FindGameObjectsWithTag("Player")[0].transform; // én irtam bele lol
 			if (target != null && ai != null) ai.destination = target.position;
 		}
 	}

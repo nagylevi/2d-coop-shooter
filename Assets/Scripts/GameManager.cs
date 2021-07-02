@@ -1,18 +1,25 @@
 using Photon.Pun;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour {
+public class GameManager : MonoBehaviourPunCallbacks {
 
     [SerializeField] private GameObject playerPrefab;
     [SerializeField] private GameObject enemyPrefab;
     [SerializeField] private GameData gameData;
 
-    void Start() {
-        SpawnPlayer(); // Spawn each player is joined
+    [SerializeField] private bool isTesting;
 
-        // Spawn enemies if is the masterClient
-        if (PhotonNetwork.IsMasterClient)
-            SpawnEnemies();
+    void Start() {
+        if (isTesting) {
+            PhotonNetwork.ConnectUsingSettings();
+            Debug.Log("Connecting to the server...");
+        } else {
+            // Spawn each player is joined
+            SpawnPlayer();
+            // Spawn enemies if is the masterClient
+            if (PhotonNetwork.IsMasterClient)
+                SpawnEnemies();
+        }
     }
 
     void SpawnPlayer() {
@@ -24,5 +31,25 @@ public class GameManager : MonoBehaviour {
             GameObject enemyRef = PhotonNetwork.Instantiate(enemyPrefab.name, Vector2.one, Quaternion.identity);
             enemyRef.GetComponent<EnemyController>().SetUpEnemy(gameData.enemies[i]);
         }
+    }
+
+    public override void OnConnectedToMaster() {
+        Debug.Log("Connected to the server!");
+        PhotonNetwork.JoinLobby();
+        Debug.Log("Joining to the lobby...");
+    }
+
+    public override void OnJoinedLobby() {
+        Debug.Log("Joined to the lobby!");
+        PhotonNetwork.CreateRoom("TestRoom");
+        Debug.Log("Creating TestRoom...");
+    }
+
+    public override void OnJoinedRoom() {
+        Debug.Log("Created TestRoom!");
+        SpawnPlayer();
+        Debug.Log("Spawned Player!");
+        SpawnEnemies();
+        Debug.Log("Spawned Enemies!");
     }
 }

@@ -41,12 +41,12 @@ public class GameManager : MonoBehaviourPunCallbacks {
 
     public override void OnJoinedLobby() {
         Debug.Log("Joined to the lobby!");
-        PhotonNetwork.CreateRoom("TestRoom");
-        Debug.Log("Creating TestRoom...");
+        PhotonNetwork.JoinOrCreateRoom("TestRoom", null, null);
+        Debug.Log("Creating or Joining TestRoom...");
     }
 
     public override void OnJoinedRoom() {
-        Debug.Log("Created TestRoom!");
+        Debug.Log("Created or Joined TestRoom!");
         SpawnPlayer();
         Debug.Log("Spawned Player!");
         SpawnEnemies();

@@ -1704,6 +1704,7 @@ MonoBehaviour:
   leftArmSolverTarget: {fileID: 6205408804484854887}
   rightArmSolverTarget: {fileID: 6205408805050930884}
   isFacingRight: 1
+  health: 100
 --- !u!114 &6205408806019366449
 MonoBehaviour:
   m_ObjectHideFlags: 0

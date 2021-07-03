@@ -291,7 +291,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyGFX: {fileID: 1237220054278675467}
-  deathEffect: {fileID: 3675956374015122888, guid: 3770e388356525447a4403e429db163a, type: 3}
   nextWaypointDistance: 2
   jumpForce: 15
   targetLayerMask:

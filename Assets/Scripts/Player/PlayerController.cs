@@ -22,6 +22,9 @@ public class PlayerController : MonoBehaviour {
     [HideInInspector]
     public bool isFacingRight = true;
 
+    // Stats
+    public int health = 100;
+
     private Vector3 mousePosition;
     private PhotonView view;
     private Gun currentGun;
@@ -149,6 +152,5 @@ public class PlayerController : MonoBehaviour {
         _muzzleFlash.enabled = true;
         yield return new WaitForSeconds(0.02f);
         _muzzleFlash.enabled = false;
-
     }
 }

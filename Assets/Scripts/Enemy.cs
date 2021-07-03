@@ -13,6 +13,8 @@ public class Enemy : ScriptableObject {
     public float attackRange;
     public EnemyType enemyType;
     public Color enemyColor;
+    public GameObject deathEffect;
+    public GameObject projectile;
 }
 
 public enum EnemyType {

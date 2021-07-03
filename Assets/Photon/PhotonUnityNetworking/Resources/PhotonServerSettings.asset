@@ -42,6 +42,7 @@ MonoBehaviour:
   - RPC_Shoot
   - SetUpEnemyRPC
   - FlipEnemyGFX_RPC
+  - EnemyShootRPC
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1

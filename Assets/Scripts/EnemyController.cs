@@ -8,7 +8,6 @@ public class EnemyController : MonoBehaviourPun {
 
     [Header("References")]
     public GameObject enemyGFX;
-    public GameObject deathEffect;
 
     [Header("AI")]
     public float nextWaypointDistance = 3f;
@@ -22,13 +21,19 @@ public class EnemyController : MonoBehaviourPun {
     private float groundCheckRadius;
     private bool isGrounded;
 
-    // Private variables
+    // Enemy
     private int health;
     private int damage;
     private float moveSpeed;
     private float attackSpeed;
     private float attackRange;
     private EnemyType enemyType;
+    private GameObject deathEffect;
+    private GameObject projectile;
+
+    private bool isReadyToShoot = true;
+
+    private GameData gameData;
 
     // private AI
     private Rigidbody2D rb;
@@ -43,6 +48,7 @@ public class EnemyController : MonoBehaviourPun {
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
         capsuleCollider2D = GetComponent<CapsuleCollider2D>();
+        gameData = GameObject.Find("_GameData").GetComponent<GameData>();
     }
 
     void Start() {
@@ -83,7 +89,12 @@ public class EnemyController : MonoBehaviourPun {
                 rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             }
         } else {
-            Shoot();
+            rb.velocity = new Vector2(0f, rb.velocity.y);
+            if (isReadyToShoot) {
+                base.photonView.RPC("EnemyShootRPC", RpcTarget.AllViaServer, (Vector2)(target.position - transform.position).normalized);
+                isReadyToShoot = false;
+                Invoke(nameof(ResetShoot), attackSpeed);
+            }
         }
 
         float distance = Vector2.Distance(rb.position, path.vectorPath[currentWaypoint]);
@@ -93,16 +104,14 @@ public class EnemyController : MonoBehaviourPun {
 
         // Flip enemyGFX based on velocity
         if (force.x >= 0.01f) {
-            //enemyGFX.transform.localScale = new Vector3(1f, 1f, 1f);
             base.photonView.RPC("FlipEnemyGFX_RPC", RpcTarget.AllViaServer, new Vector3(1f, 1f, 1f));
         } else if (force.x <= 0.01f) {
-            //enemyGFX.transform.localScale = new Vector3(-1f, 1f, 1f);
             base.photonView.RPC("FlipEnemyGFX_RPC", RpcTarget.AllViaServer, new Vector3(-1f, 1f, 1f));
         }
     }
 
-    public void SetUpEnemy(Enemy enemy) {
-        base.photonView.RPC("SetUpEnemyRPC", RpcTarget.AllBufferedViaServer, ConvertEnemyToObjectArray(enemy));
+    public void SetUpEnemy(int enemyID) {
+        base.photonView.RPC("SetUpEnemyRPC", RpcTarget.AllBufferedViaServer, enemyID);
     }
 
     public void TakeDamage(int _damage) {
@@ -134,8 +143,8 @@ public class EnemyController : MonoBehaviourPun {
         return targetHit;
     }
 
-    void Shoot() {
-        Debug.Log("Enemy is Shooting");
+    void ResetShoot() {
+        isReadyToShoot = true;
     }
 
     Transform FindClosestTarget() {
@@ -150,15 +159,25 @@ public class EnemyController : MonoBehaviourPun {
     }
 
     [PunRPC]
-    void SetUpEnemyRPC(object[] datas) {
-        gameObject.name = (string)datas[0];
-        health = (int)datas[1];
-        damage = (int)datas[2];
-        moveSpeed = (float)datas[3];
-        attackSpeed = (float)datas[4];
-        attackRange = (float)datas[5];
-        enemyType = (EnemyType)(int)datas[6];
-        enemyGFX.GetComponent<SpriteRenderer>().color = new Color((float)datas[7], (float)datas[8], (float)datas[9]);
+    void EnemyShootRPC(Vector2 dir) {
+        GameObject projectileRef = Instantiate(projectile, transform.position, Quaternion.identity);
+        projectileRef.GetComponent<Projectile>().SetUp(400f, dir, damage);
+    }
+
+    [PunRPC]
+    void SetUpEnemyRPC(int enemyID) {
+        Enemy enemy = gameData.enemies[enemyID];
+
+        gameObject.name = enemy.enemyName;
+        health = enemy.health;
+        damage = enemy.damage;
+        moveSpeed = enemy.moveSpeed;
+        attackSpeed = enemy.attackSpeed;
+        attackRange = enemy.attackRange;
+        enemyType = enemy.enemyType;
+        enemyGFX.GetComponent<SpriteRenderer>().color = enemy.enemyColor;
+        deathEffect = enemy.deathEffect;
+        projectile = enemy.projectile;
     }
 
     [PunRPC]
@@ -170,21 +189,6 @@ public class EnemyController : MonoBehaviourPun {
     [PunRPC]
     void FlipEnemyGFX_RPC(Vector3 scale) {
         enemyGFX.transform.localScale = scale;
-    }
-
-    object[] ConvertEnemyToObjectArray(Enemy enemy) {
-        return new object[] {
-            enemy.name,
-            enemy.health,
-            enemy.damage,
-            enemy.moveSpeed,
-            enemy.attackSpeed,
-            enemy.attackRange,
-            (int)enemy.enemyType,
-            enemy.enemyColor.r,
-            enemy.enemyColor.b,
-            enemy.enemyColor.g
-        };
     }
 
     // ----- G R O U N D   C H E C K   D E B U G -----

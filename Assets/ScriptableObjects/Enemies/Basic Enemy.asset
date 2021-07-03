@@ -20,3 +20,5 @@ MonoBehaviour:
   attackRange: 5
   enemyType: 0
   enemyColor: {r: 0.6132076, g: 0.28635636, b: 0.28635636, a: 1}
+  deathEffect: {fileID: 3675956374015122888, guid: 3770e388356525447a4403e429db163a, type: 3}
+  projectile: {fileID: 6816572704435615461, guid: 23ed933f9904f49419a8882afa44ac66, type: 3}

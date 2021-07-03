@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviourPunCallbacks {
     void SpawnEnemies() {
         for (int i = 0; i < gameData.enemies.Count; i++) {
             GameObject enemyRef = PhotonNetwork.Instantiate(enemyPrefab.name, Vector2.one, Quaternion.identity);
-            enemyRef.GetComponent<EnemyController>().SetUpEnemy(gameData.enemies[i]);
+            enemyRef.GetComponent<EnemyController>().SetUpEnemy(i);
         }
     }
 

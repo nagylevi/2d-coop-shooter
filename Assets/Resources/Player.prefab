@@ -1676,7 +1676,7 @@ MonoBehaviour:
   groundCheckOffsetY: 0.1
   platformLayerMask:
     serializedVersion: 2
-    m_Bits: 320
+    m_Bits: 832
   animator: {fileID: 5123072241544510085}
   controller: {fileID: 6205408806019366450}
 --- !u!114 &6205408806019366450

@@ -15,8 +15,8 @@ MonoBehaviour:
   enemyName: Basic Enemy
   health: 100
   damage: 8
-  moveSpeed: 10
+  moveSpeed: 200
   attackSpeed: 1.5
-  attackRange: 4
+  attackRange: 5
   enemyType: 0
   enemyColor: {r: 0.6132076, g: 0.28635636, b: 0.28635636, a: 1}
